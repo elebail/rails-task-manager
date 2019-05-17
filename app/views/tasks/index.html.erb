@@ -1,10 +1,15 @@
 <h1>Tasks</h1>
   <% @tasks.each do |task| %>
-    <% if task.completed %>
-      <h3><input type="checkbox" checked id="task" value="task"><%= link_to task.title, task_path(task) %> </h3>
+      <h3><% if task.completed %>
+      ☑︎<%= link_to task.title, task_path(task) %> -
     <% else %>
-       <h3><input type="checkbox" id="task" value="task"><%= link_to task.title, task_path(task) %> </h3>
+       ☐<%= link_to task.title, task_path(task) %> -
     <% end %>
+    <%= link_to "🗑", task_path(task),
+      method: :delete,
+      data: { confirm: "Delete #{task.title}?" } %>
+      </h3>
   <% end %>
+
 
 <%= link_to "✚ Add a new task", new_path %>
